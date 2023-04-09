@@ -1,20 +1,55 @@
 <template>
-  <div>
-    <h1>Edit Product</h1>
-    <form v-if="product" @submit.prevent="updateProduct">
-      <label>Name:</label>
-      <input v-model="product.name" type="text" />
-      <br />
-      <label>Description:</label>
-      <input v-model="product.description" type="text" />
-      <br />
-      <label>Price:</label>
-      <input v-model="product.price" type="number" step="0.01" />
-      <br />
-      <label>Image URL:</label>
-      <input v-model="product.image" type="text" />
-      <br />
-      <button type="submit">Save Changes</button>
+  <div class="p-4">
+    <div class="mb-4">
+      <router-link
+        to="/"
+        class="bg-gray-300 hover:bg-gray-400 transition-colors rounded-md py-2 px-4"
+        >&larr; Back</router-link
+      >
+    </div>
+    <h1 class="text-3xl font-bold mb-4">Edit Product</h1>
+    <form
+      class="flex flex-col space-y-4"
+      v-if="product"
+      @submit.prevent="updateProduct"
+    >
+      <label class="text-lg font-semibold" for="name">Name:</label>
+      <input
+        class="border rounded-md p-2"
+        v-model="product.name"
+        type="text"
+        id="name"
+      />
+      <label class="text-lg font-semibold" for="description"
+        >Description:</label
+      >
+      <input
+        class="border rounded-md p-2"
+        v-model="product.description"
+        type="text"
+        id="description"
+      />
+      <label class="text-lg font-semibold" for="price">Price:</label>
+      <input
+        class="border rounded-md p-2"
+        v-model="product.price"
+        type="number"
+        step="0.01"
+        id="price"
+      />
+      <label class="text-lg font-semibold" for="image">Image URL:</label>
+      <input
+        class="border rounded-md p-2"
+        v-model="product.image"
+        type="text"
+        id="image"
+      />
+      <button
+        class="bg-blue-500 text-white rounded-md py-2 px-4 hover:bg-blue-600 transition-colors"
+        type="submit"
+      >
+        Save Changes
+      </button>
     </form>
   </div>
 </template>

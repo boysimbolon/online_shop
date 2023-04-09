@@ -1,20 +1,51 @@
 <template>
-  <div>
-    <h1>Create Product</h1>
-    <form @submit.prevent="createProduct">
-      <label>Name:</label>
-      <input v-model="name" type="text" />
-      <br />
-      <label>Description:</label>
-      <input v-model="description" type="text" />
-      <br />
-      <label>Price:</label>
-      <input v-model="price" type="number" step="0.01" />
-      <br />
-      <label>Image URL:</label>
-      <input v-model="image" type="text" />
-      <br />
-      <button type="submit">Create</button>
+  <div class="p-4">
+    <div class="mb-4">
+      <router-link
+        to="/"
+        class="bg-gray-300 hover:bg-gray-400 transition-colors rounded-md py-2 px-4"
+        >&larr; Back</router-link
+      >
+    </div>
+    <h1 class="text-3xl font-bold mb-4">Create Product</h1>
+    <form class="flex flex-col space-y-4" @submit.prevent="createProduct">
+      <label class="text-lg font-semibold" for="name">Name:</label>
+      <input
+        class="border rounded-md p-2"
+        v-model="name"
+        type="text"
+        id="name"
+      />
+      <label class="text-lg font-semibold" for="description"
+        >Description:</label
+      >
+      <input
+        class="border rounded-md p-2"
+        v-model="description"
+        type="text"
+        id="description"
+      />
+      <label class="text-lg font-semibold" for="price">Price:</label>
+      <input
+        class="border rounded-md p-2"
+        v-model="price"
+        type="number"
+        step="0.01"
+        id="price"
+      />
+      <label class="text-lg font-semibold" for="image">Image URL:</label>
+      <input
+        class="border rounded-md p-2"
+        v-model="image"
+        type="text"
+        id="image"
+      />
+      <button
+        class="bg-blue-500 text-white rounded-md py-2 px-4 hover:bg-blue-600 transition-colors"
+        type="submit"
+      >
+        Create
+      </button>
     </form>
   </div>
 </template>
