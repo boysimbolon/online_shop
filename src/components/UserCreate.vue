@@ -1,13 +1,11 @@
 <template>
   <div class="p-4">
-    <div class="mb-4">
-      <router-link
-        class="bg-gray-300 hover:bg-gray-400 transition-colors rounded-md py-2 px-4"
-        to="/"
-      >
-        &larr; Back</router-link
-      >
-    </div>
+    <button
+      class="bg-gray-300 hover:bg-gray-400 transition-colors rounded-md py-2 px-4 mb-6"
+      @click="goBack"
+    >
+      &larr; Back
+    </button>
     <h1 class="text-3xl font-bold mb-4">Create User</h1>
     <form class="flex flex-col space-y-4" @submit.prevent="createUser">
       <label class="text-lg font-semibold" for="name">Name:</label>
@@ -52,6 +50,10 @@ const router = useRouter();
 const name = ref("");
 const email = ref("");
 const password = ref("");
+
+const goBack = () => {
+  router.go(-1);
+};
 
 const createUser = async () => {
   try {

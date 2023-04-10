@@ -1,12 +1,11 @@
 <template>
   <div class="p-4">
-    <div class="mb-4">
-      <router-link
-        to="/users"
-        class="bg-gray-300 hover:bg-gray-400 transition-colors rounded-md py-2 px-4"
-        >&larr; Back</router-link
-      >
-    </div>
+    <button
+      class="bg-gray-300 hover:bg-gray-400 transition-colors rounded-md py-2 px-4 mb-6"
+      @click="goBack"
+    >
+      &larr; Back
+    </button>
     <h1 class="text-3xl font-bold mb-4">User Details</h1>
     <div class="bg-white rounded-lg p-4 shadow-md" v-if="user">
       <h3 class="text-xl font-bold mb-2">{{ user.name }}</h3>
@@ -36,6 +35,10 @@ import { useRouter, useRoute } from "vue-router";
 const router = useRouter();
 const route = useRoute();
 const user = ref(null);
+
+const goBack = () => {
+  router.go(-1);
+};
 
 onMounted(async () => {
   const response = await axios.get(

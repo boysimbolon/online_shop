@@ -1,12 +1,11 @@
 <template>
   <div class="p-4">
-    <div class="mb-4">
-      <router-link
-        to="/"
-        class="bg-gray-300 hover:bg-gray-400 transition-colors rounded-md py-2 px-4"
-        >&larr; Back</router-link
-      >
-    </div>
+    <button
+      class="bg-gray-300 hover:bg-gray-400 transition-colors rounded-md py-2 px-4 mb-6"
+      @click="goBack"
+    >
+      &larr; Back
+    </button>
     <h1 class="text-3xl font-bold mb-4">Edit User</h1>
     <form
       class="flex flex-col space-y-4"
@@ -55,6 +54,10 @@ const route = useRoute();
 const user = ref(null);
 const password = ref("");
 
+const goBack = () => {
+  router.go(-1);
+};
+
 onMounted(async () => {
   const response = await axios.get(
     `http://localhost:8000/api/users/${route.params.id}`
@@ -63,13 +66,16 @@ onMounted(async () => {
 });
 
 const updateUser = async () => {
-  const data = { ...user.value };
+  const updatePayload = {
+    name: user.value.name,
+    email: user.value.email,
+  };
   if (password.value) {
-    data.password = password.value;
+    updatePayload.password = password.value;
   }
   const response = await axios.put(
     `http://localhost:8000/api/users/${user.value.id}`,
-    data
+    updatePayload
   );
   router.push(`/users/${user.value.id}`);
 };

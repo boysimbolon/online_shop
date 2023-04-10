@@ -7,6 +7,8 @@ import UserList from "../components/UserList.vue";
 import UserCreate from "../components/UserCreate.vue";
 import UserDetails from "../components/UserDetails.vue";
 import UserEdit from "../components/UserEdit.vue";
+import Login from "../components/Login.vue";
+import { useAuthStore } from "../stores/auth";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -15,6 +17,11 @@ const router = createRouter({
       path: "/",
       name: "home",
       component: ProductList,
+    },
+    {
+      path: "/login",
+      name: "login",
+      component: Login,
     },
     {
       path: "/create",
@@ -52,6 +59,16 @@ const router = createRouter({
       component: UserEdit,
     },
   ],
+});
+
+router.beforeEach((to, from, next) => {
+  const authStore = useAuthStore();
+
+  if (to.name !== "login" && !authStore.isLoggedIn) {
+    next({ name: "login" });
+  } else {
+    next();
+  }
 });
 
 export default router;
