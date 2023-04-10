@@ -1,3 +1,4 @@
+// Import necessary functions and components from Vue Router and the application
 import { createRouter, createWebHistory } from "vue-router";
 import ProductList from "../components/ProductList.vue";
 import ProductCreate from "../components/ProductCreate.vue";
@@ -10,49 +11,59 @@ import UserEdit from "../components/UserEdit.vue";
 import Login from "../components/Login.vue";
 import { useAuthStore } from "../stores/auth";
 
+// Create a router instance with an array of route objects
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
+    // Home route
     {
       path: "/",
       name: "home",
       component: ProductList,
     },
+    // Login route
     {
       path: "/login",
       name: "login",
       component: Login,
     },
+    // Create product route
     {
       path: "/create",
       name: "productcreate",
       component: ProductCreate,
     },
+    // Product details route
     {
       path: "/product/:id",
       name: "productdetail",
       component: ProductDetails,
     },
+    // Edit product route
     {
       path: "/product/:id/edit",
       name: "productedit",
       component: ProductEdit,
     },
+    // User list route
     {
       path: "/users",
       name: "userlist",
       component: UserList,
     },
+    // Create user route
     {
       path: "/users/create",
       name: "usercreate",
       component: UserCreate,
     },
+    // User details route
     {
       path: "/users/:id",
       name: "userdetail",
       component: UserDetails,
     },
+    // Edit user route
     {
       path: "/users/:id/edit",
       name: "useredit",
@@ -61,6 +72,7 @@ const router = createRouter({
   ],
 });
 
+// Add global navigation guards to the router
 router.beforeEach((to, from, next) => {
   const authStore = useAuthStore();
 
@@ -71,4 +83,5 @@ router.beforeEach((to, from, next) => {
   }
 });
 
+// Export the router instance
 export default router;
