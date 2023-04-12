@@ -58,25 +58,40 @@
 import axios from "axios";
 import { ref, onMounted } from "vue";
 import { useRouter, useRoute } from "vue-router";
+import { useAuthStore } from "@/stores/auth";
 
 const router = useRouter();
 const route = useRoute();
 const product = ref(null);
+const authStore = useAuthStore();
 
 onMounted(async () => {
   const response = await axios.get(
-    `http://localhost:8000/api/products/${route.params.id}`
+    `http://localhost:8000/api/products/${route.params.id}`,
+    {
+      headers: {
+        Authorization: `Bearer ${authStore.accessToken}`,
+      },
+    }
   );
   product.value = response.data.data;
 });
 
 const updateProduct = async () => {
-  await axios.put(`http://localhost:8000/api/products/${product.value.id}`, {
-    name: product.value.name,
-    description: product.value.description,
-    price: product.value.price,
-    image: product.value.image,
-  });
+  await axios.put(
+    `http://localhost:8000/api/products/${product.value.id}`,
+    {
+      name: product.value.name,
+      description: product.value.description,
+      price: product.value.price,
+      image: product.value.image,
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${authStore.accessToken}`,
+      },
+    }
+  );
   router.push(`/product/${product.value.id}`);
 };
 </script>

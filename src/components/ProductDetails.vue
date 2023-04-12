@@ -36,14 +36,21 @@
 import axios from "axios";
 import { ref, onMounted } from "vue";
 import { useRouter, useRoute } from "vue-router";
+import { useAuthStore } from "@/stores/auth";
 
 const router = useRouter();
 const route = useRoute();
 const product = ref(null);
+const authStore = useAuthStore();
 
 onMounted(async () => {
   const response = await axios.get(
-    `http://localhost:8000/api/products/${route.params.id}`
+    `http://localhost:8000/api/products/${route.params.id}`,
+    {
+      headers: {
+        Authorization: `Bearer ${authStore.accessToken}`,
+      },
+    }
   );
   product.value = response.data.data;
 });
@@ -51,7 +58,12 @@ onMounted(async () => {
 const deleteProduct = async () => {
   if (confirm("Are you sure you want to delete this product?")) {
     await axios.delete(
-      `http://localhost:8000/api/products/${product.value.id}`
+      `http://localhost:8000/api/products/${product.value.id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${authStore.accessToken}`,
+        },
+      }
     );
     router.push("/");
   }

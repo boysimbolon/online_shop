@@ -54,6 +54,8 @@
 import axios from "axios";
 import { ref } from "vue";
 import { useRouter } from "vue-router";
+import { useAuthStore } from "@/stores/auth";
+const authStore = useAuthStore();
 
 const router = useRouter();
 const name = ref("");
@@ -62,12 +64,20 @@ const price = ref("");
 const image = ref("");
 
 const createProduct = async () => {
-  await axios.post("http://localhost:8000/api/products", {
-    name: name.value,
-    description: description.value,
-    price: price.value,
-    image: image.value,
-  });
+  await axios.post(
+    "http://localhost:8000/api/products",
+    {
+      name: name.value,
+      description: description.value,
+      price: price.value,
+      image: image.value,
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${authStore.accessToken}`,
+      },
+    }
+  );
   router.push("/");
 };
 </script>

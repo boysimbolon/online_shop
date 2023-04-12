@@ -31,12 +31,19 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import axios from "axios";
+import { useAuthStore } from "@/stores/auth";
+
+const authStore = useAuthStore();
 
 const users = ref([]);
 
 const getUsers = async () => {
   try {
-    const response = await axios.get("http://localhost:8000/api/users");
+    const response = await axios.get("http://localhost:8000/api/users", {
+      headers: {
+        Authorization: `Bearer ${authStore.accessToken}`,
+      },
+    });
     users.value = response.data.data;
   } catch (error) {
     console.error(error);

@@ -44,11 +44,14 @@
     </form>
   </div>
 </template>
+
 <script setup>
 import axios from "axios";
 import { ref, onMounted } from "vue";
 import { useRouter, useRoute } from "vue-router";
+import { useAuthStore } from "@/stores/auth";
 
+const authStore = useAuthStore();
 const router = useRouter();
 const route = useRoute();
 const user = ref(null);
@@ -59,10 +62,19 @@ const goBack = () => {
 };
 
 onMounted(async () => {
-  const response = await axios.get(
-    `http://localhost:8000/api/users/${route.params.id}`
-  );
-  user.value = response.data.data;
+  try {
+    const response = await axios.get(
+      `http://localhost:8000/api/users/${route.params.id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${authStore.accessToken}`,
+        },
+      }
+    );
+    user.value = response.data.data;
+  } catch (error) {
+    console.error(error);
+  }
 });
 
 const updateUser = async () => {
@@ -75,7 +87,12 @@ const updateUser = async () => {
   }
   const response = await axios.put(
     `http://localhost:8000/api/users/${user.value.id}`,
-    updatePayload
+    updatePayload,
+    {
+      headers: {
+        Authorization: `Bearer ${authStore.accessToken}`,
+      },
+    }
   );
   router.push(`/users/${user.value.id}`);
 };

@@ -31,6 +31,8 @@
 import axios from "axios";
 import { ref, onMounted } from "vue";
 import { useRouter, useRoute } from "vue-router";
+import { useAuthStore } from "@/stores/auth";
+const authStore = useAuthStore();
 
 const router = useRouter();
 const route = useRoute();
@@ -42,14 +44,23 @@ const goBack = () => {
 
 onMounted(async () => {
   const response = await axios.get(
-    `http://localhost:8000/api/users/${route.params.id}`
+    `http://localhost:8000/api/users/${route.params.id}`,
+    {
+      headers: {
+        Authorization: `Bearer ${authStore.accessToken}`,
+      },
+    }
   );
   user.value = response.data.data;
 });
 
 const deleteUser = async () => {
   if (confirm("Are you sure you want to delete this user?")) {
-    await axios.delete(`http://localhost:8000/api/users/${user.value.id}`);
+    await axios.delete(`http://localhost:8000/api/users/${user.value.id}`, {
+      headers: {
+        Authorization: `Bearer ${authStore.accessToken}`,
+      },
+    });
     router.push("/users");
   }
 };

@@ -29,11 +29,18 @@
 <script setup>
 import axios from "axios";
 import { ref, onMounted } from "vue";
+import { useAuthStore } from "@/stores/auth";
+
+const authStore = useAuthStore();
 
 const products = ref([]);
 
 onMounted(async () => {
-  const response = await axios.get("http://localhost:8000/api/products");
+  const response = await axios.get("http://localhost:8000/api/products", {
+    headers: {
+      Authorization: `Bearer ${authStore.accessToken}`,
+    },
+  });
   products.value = response.data.data;
 });
 </script>

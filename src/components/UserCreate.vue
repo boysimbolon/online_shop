@@ -45,7 +45,9 @@
 import axios from "axios";
 import { ref } from "vue";
 import { useRouter } from "vue-router";
+import { useAuthStore } from "@/stores/auth";
 
+const authStore = useAuthStore();
 const router = useRouter();
 const name = ref("");
 const email = ref("");
@@ -57,11 +59,19 @@ const goBack = () => {
 
 const createUser = async () => {
   try {
-    const response = await axios.post("http://localhost:8000/api/users", {
-      name: name.value,
-      email: email.value,
-      password: password.value,
-    });
+    const response = await axios.post(
+      "http://localhost:8000/api/users",
+      {
+        name: name.value,
+        email: email.value,
+        password: password.value,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${authStore.accessToken}`,
+        },
+      }
+    );
     console.log(response.data);
     // reset form
     name.value = "";
