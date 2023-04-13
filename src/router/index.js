@@ -9,6 +9,10 @@ import UserCreate from "../components/UserCreate.vue";
 import UserDetails from "../components/UserDetails.vue";
 import UserEdit from "../components/UserEdit.vue";
 import Login from "../components/Login.vue";
+import OrderList from "../components/OrderList.vue";
+import OrderDetails from "../components/OrderDetails.vue";
+import OrderCreate from "../components/OrderCreate.vue";
+import OrderEdit from "../components/OrderEdit.vue";
 import { useAuthStore } from "../stores/auth";
 
 // Create a router instance with an array of route objects
@@ -68,6 +72,30 @@ const router = createRouter({
       path: "/users/:id/edit",
       name: "useredit",
       component: UserEdit,
+    },
+    // Order list route
+    {
+      path: "/orders",
+      name: "orderlist",
+      component: OrderList,
+    },
+    // Create order route
+    {
+      path: "/orders/create",
+      name: "ordercreate",
+      component: OrderCreate,
+    },
+    // Order details route
+    {
+      path: "/orders/:id",
+      name: "orderdetail",
+      component: OrderDetails,
+    },
+    // Edit order route
+    {
+      path: "/orders/:id/edit",
+      name: "orderedit",
+      component: OrderEdit,
     },
   ],
 });

@@ -3,13 +3,19 @@
   <nav v-if="authStore.isLoggedIn" class="bg-gray-800 p-4 px-8 flex">
     <!-- Home link -->
     <RouterLink to="/" class="text-white hover:text-gray-200 transition-colors"
-      >Home</RouterLink
+      >Products</RouterLink
     >
     <!-- Users link -->
     <RouterLink
       to="/users"
       class="ml-4 text-white hover:text-gray-200 transition-colors"
       >Users</RouterLink
+    >
+    <!-- Orders link -->
+    <RouterLink
+      to="/orders"
+      class="ml-4 text-white hover:text-gray-200 transition-colors"
+      >Orders</RouterLink
     >
     <!-- Logout button -->
     <button
@@ -19,14 +25,12 @@
       Logout
     </button>
   </nav>
-
   <!-- Main content area -->
   <div class="p-4">
     <!-- Render the current route -->
     <RouterView />
   </div>
 </template>
-
 <script setup>
 // Import hooks from Vuex and Vue Router
 import { useAuthStore } from "@/stores/auth";
@@ -42,5 +46,4 @@ const logout = () => {
   router.push({ name: "login" }); // Redirect to login route
 };
 </script>
-
 <style></style>
