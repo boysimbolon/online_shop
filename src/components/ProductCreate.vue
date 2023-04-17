@@ -1,5 +1,6 @@
 <template>
   <div class="p-4">
+    <!-- Display a back button to return to the product list, and a heading for the create product form -->
     <div class="mb-4">
       <router-link
         to="/"
@@ -8,6 +9,8 @@
       >
     </div>
     <h1 class="text-3xl font-bold mb-4">Create Product</h1>
+
+    <!-- Display a form to create a new product -->
     <form class="flex flex-col space-y-4" @submit.prevent="createProduct">
       <label class="text-lg font-semibold" for="name">Name:</label>
       <input
@@ -55,15 +58,20 @@ import axios from "axios";
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 import { useAuthStore } from "@/stores/auth";
+
+// Retrieve the authentication store instance from the Vuex store
 const authStore = useAuthStore();
 
+// Define reactive references to the form fields
 const router = useRouter();
 const name = ref("");
 const description = ref("");
 const price = ref("");
 const image = ref("");
 
+// Define a function to create a new product
 const createProduct = async () => {
+  // Send a POST request to the API with the form data
   await axios.post(
     "http://localhost:8000/api/products",
     {
@@ -78,6 +86,8 @@ const createProduct = async () => {
       },
     }
   );
+
+  // Redirect the user to the product list
   router.push("/");
 };
 </script>

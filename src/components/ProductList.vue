@@ -1,5 +1,6 @@
 <template>
   <div class="p-4">
+    <!-- Display the product list heading and a button to create a new product -->
     <h1 class="text-3xl font-bold mb-4">Product List</h1>
     <router-link
       to="/create"
@@ -7,6 +8,7 @@
       >Create a new product</router-link
     >
 
+    <!-- Display a grid of product cards, each with a link to view details -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
       <div
         v-for="product in products"
@@ -31,10 +33,13 @@ import axios from "axios";
 import { ref, onMounted } from "vue";
 import { useAuthStore } from "@/stores/auth";
 
+// Retrieve the authentication store instance from the Vuex store
 const authStore = useAuthStore();
 
+// Define a reactive reference to the list of products
 const products = ref([]);
 
+// Fetch the list of products from the API when the component is mounted
 onMounted(async () => {
   const response = await axios.get("http://localhost:8000/api/products", {
     headers: {
