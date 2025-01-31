@@ -32,6 +32,7 @@
   </div>
 </template>
 <script setup>
+document.title = "Online Shop |";
 // Import hooks from Vuex and Vue Router
 import { useAuthStore } from "@/stores/auth";
 import { useRouter, useRoute } from "vue-router";
