@@ -30,5 +30,5 @@ Route::middleware('auth:sanctum')->group(function () {
     // Define logout route
     Route::post('/logout', [LoginController::class, 'logout']);
 });
-
+Route::post('/register', [UserController::class, 'register']);
 ?>
