@@ -80,7 +80,7 @@ onMounted(async () => {
   try {
     // Send a GET request to the API to fetch the user details
     const response = await axios.get(
-      `http://localhost:8000/api/users/${route.params.id}`,
+      `https://meonlineshop.rf.gd/api/users/${route.params.id}`,
       {
         // Include the access token in the request headers for authentication
         headers: {
@@ -110,7 +110,7 @@ const updateUser = async () => {
     }
     // Send the PUT request to update the user details
     const response = await axios.put(
-      `http://localhost:8000/api/users/${user.value.id}`,
+      `https://meonlineshop.rf.gd/api/users/${user.value.id}`,
       updatePayload,
       {
         // Include the access token in the request headers for authentication

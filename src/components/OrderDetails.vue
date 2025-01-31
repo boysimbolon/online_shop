@@ -67,7 +67,7 @@ const order = ref(null);
 // Fetch the order data when the component is mounted
 onMounted(async () => {
   const response = await axios.get(
-    `http://localhost:8000/api/orders/${route.params.id}`,
+    `https://meonlineshop.rf.gd/api/orders/${route.params.id}`,
     {
       headers: {
         Authorization: `Bearer ${authStore.accessToken}`,
@@ -83,7 +83,7 @@ const deleteOrder = async () => {
   if (confirm("Are you sure you want to delete this order?")) {
     try {
       await axios.delete(
-        `http://localhost:8000/api/orders/${route.params.id}`,
+        `https://meonlineshop.rf.gd/api/orders/${route.params.id}`,
         {
           headers: {
             Authorization: `Bearer ${authStore.accessToken}`,

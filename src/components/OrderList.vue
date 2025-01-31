@@ -105,7 +105,7 @@ const orders = ref([]);
 // Load the orders when the component is mounted
 onMounted(async () => {
   try {
-    const response = await axios.get("http://localhost:8000/api/orders", {
+    const response = await axios.get("https://meonlineshop.rf.gd/api/orders", {
       headers: {
         Authorization: `Bearer ${authStore.accessToken}`,
       },

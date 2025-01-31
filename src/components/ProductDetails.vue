@@ -56,7 +56,7 @@ const authStore = useAuthStore();
 // Retrieve the product details from the API and set the product reference
 onMounted(async () => {
   const response = await axios.get(
-    `http://localhost:8000/api/products/${route.params.id}`,
+    `https://meonlineshop.rf.gd/api/products/${route.params.id}`,
     {
       headers: {
         Authorization: `Bearer ${authStore.accessToken}`,
@@ -72,7 +72,7 @@ const deleteProduct = async () => {
   if (confirm("Are you sure you want to delete this product?")) {
     // Send a DELETE request to the API to delete the product
     await axios.delete(
-      `http://localhost:8000/api/products/${product.value.id}`,
+      `https://meonlineshop.rf.gd/api/products/${product.value.id}`,
       {
         headers: {
           Authorization: `Bearer ${authStore.accessToken}`,

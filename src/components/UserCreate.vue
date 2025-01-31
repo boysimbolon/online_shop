@@ -77,7 +77,7 @@ const createUser = async () => {
   try {
     // Send a POST request to the API to create a new user
     const response = await axios.post(
-      "http://localhost:8000/api/users",
+      "https://meonlineshop.rf.gd/api/users",
       {
         name: name.value,
         email: email.value,

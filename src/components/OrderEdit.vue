@@ -200,7 +200,7 @@ onMounted(async () => {
   try {
     // Fetch the order data from the API
     const response = await axios.get(
-      `http://localhost:8000/api/orders/${orderId}`,
+      `https://meonlineshop.rf.gd/api/orders/${orderId}`,
       {
         headers: {
           Authorization: `Bearer ${authStore.accessToken}`,
@@ -253,7 +253,7 @@ async function updateOrder() {
   try {
     // Send a PUT request to update the order with the new data
     const response = await axios.put(
-      `http://localhost:8000/api/orders/${order.value.id}`,
+      `https://meonlineshop.rf.gd/api/orders/${order.value.id}`,
       form.value,
       {
         headers: {
@@ -282,7 +282,7 @@ const products = ref([]);
 onMounted(async () => {
   try {
     // Send a GET request to the API endpoint for users and attach an authorization token to the header
-    const response = await axios.get("http://localhost:8000/api/users", {
+    const response = await axios.get("https://meonlineshop.rf.gd/api/users", {
       headers: {
         Authorization: `Bearer ${authStore.accessToken}`,
       },
@@ -296,7 +296,7 @@ onMounted(async () => {
 
   try {
     // Send a GET request to the API endpoint for products and attach an authorization token to the header
-    const response = await axios.get("http://localhost:8000/api/products", {
+    const response = await axios.get("https://meonlineshop.rf.gd/api/products", {
       headers: {
         Authorization: `Bearer ${authStore.accessToken}`,
       },

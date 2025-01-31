@@ -147,14 +147,14 @@ onMounted(async () => {
   try {
     const [usersResponse, productsResponse] = await Promise.all([
       // make two API requests to get users and products data
-      axios.get("http://localhost:8000/api/users", {
+      axios.get("https://meonlineshop.rf.gd/api/users", {
         // get users data
         headers: {
           // set headers for authentication
           Authorization: `Bearer ${authStore.accessToken}`,
         },
       }),
-      axios.get("http://localhost:8000/api/products", {
+      axios.get("https://meonlineshop.rf.gd/api/products", {
         // get products data
         headers: {
           // set headers for authentication
@@ -185,7 +185,7 @@ const createOrder = async () => {
   try {
     const response = await axios.post(
       // make an API request to create a new order
-      "http://localhost:8000/api/orders", // endpoint for creating orders
+      "https://meonlineshop.rf.gd/api/orders", // endpoint for creating orders
       form.value, // data for creating order
       {
         headers: {

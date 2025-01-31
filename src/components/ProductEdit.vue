@@ -80,7 +80,7 @@ const authStore = useAuthStore();
 onMounted(async () => {
   // Send a GET request to retrieve the product with the specified ID
   const response = await axios.get(
-    `http://localhost:8000/api/products/${route.params.id}`,
+    `https://meonlineshop.rf.gd/api/products/${route.params.id}`,
     {
       headers: {
         Authorization: `Bearer ${authStore.accessToken}`,
@@ -94,7 +94,7 @@ onMounted(async () => {
 // A function that sends a PUT request to update the product with the edited data
 const updateProduct = async () => {
   await axios.put(
-    `http://localhost:8000/api/products/${product.value.id}`,
+    `https://meonlineshop.rf.gd/api/products/${product.value.id}`,
     {
       name: product.value.name,
       description: product.value.description,

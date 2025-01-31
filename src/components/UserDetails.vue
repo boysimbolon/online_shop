@@ -62,7 +62,7 @@ onMounted(async () => {
   try {
     // Send a GET request to the API to fetch the user details
     const response = await axios.get(
-      `http://localhost:8000/api/users/${route.params.id}`,
+      `https://meonlineshop.rf.gd/api/users/${route.params.id}`,
       {
         // Include the access token in the request headers for authentication
         headers: {
@@ -83,7 +83,7 @@ const deleteUser = async () => {
   if (confirm("Are you sure you want to delete this user?")) {
     try {
       // Send a DELETE request to the API to delete the user
-      await axios.delete(`http://localhost:8000/api/users/${user.value.id}`, {
+      await axios.delete(`https://meonlineshop.rf.gd/api/users/${user.value.id}`, {
         // Include the access token in the request headers for authentication
         headers: {
           Authorization: `Bearer ${authStore.accessToken}`,

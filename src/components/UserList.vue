@@ -53,7 +53,7 @@ const users = ref([]);
 const getUsers = async () => {
   try {
     // Send a GET request to the API to fetch the list of users
-    const response = await axios.get("http://localhost:8000/api/users", {
+    const response = await axios.get("https://meonlineshop.rf.gd/api/users", {
       // Include the access token in the request headers for authentication
       headers: {
         Authorization: `Bearer ${authStore.accessToken}`,

@@ -9,6 +9,7 @@ import UserCreate from "../components/UserCreate.vue";
 import UserDetails from "../components/UserDetails.vue";
 import UserEdit from "../components/UserEdit.vue";
 import Login from "../components/Login.vue";
+import Register from "../components/Register.vue";
 import OrderList from "../components/OrderList.vue";
 import OrderDetails from "../components/OrderDetails.vue";
 import OrderCreate from "../components/OrderCreate.vue";
@@ -30,6 +31,11 @@ const router = createRouter({
       path: "/login",
       name: "login",
       component: Login,
+    },
+    {
+      path:"/register",
+      name:"register",
+      component: Register,
     },
     // Create product route
     {

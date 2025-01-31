@@ -73,7 +73,7 @@ const image = ref("");
 const createProduct = async () => {
   // Send a POST request to the API with the form data
   await axios.post(
-    "http://localhost:8000/api/products",
+    "https://meonlineshop.rf.gd/api/products",
     {
       name: name.value,
       description: description.value,

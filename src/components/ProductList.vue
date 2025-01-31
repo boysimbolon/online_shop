@@ -41,7 +41,7 @@ const products = ref([]);
 
 // Fetch the list of products from the API when the component is mounted
 onMounted(async () => {
-  const response = await axios.get("http://localhost:8000/api/products", {
+  const response = await axios.get("https://meonlineshop.rf.gd/api/products", {
     headers: {
       Authorization: `Bearer ${authStore.accessToken}`,
     },
