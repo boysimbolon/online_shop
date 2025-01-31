@@ -111,7 +111,11 @@ router.beforeEach((to, from, next) => {
   const authStore = useAuthStore();
 
   if (to.name !== "login" && !authStore.isLoggedIn) {
-    next({ name: "login" });
+    if(to.name === "register"){
+      next();
+    }else{
+      next({ name: "login" });
+    }
   } else {
     next();
   }
