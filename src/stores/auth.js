@@ -27,7 +27,7 @@ export const useAuthStore = defineStore({
     logout() {
       try {
         // Send a post request to the logout endpoint
-        axios.post("http://localhost:8000/api/logout");
+        axios.post("https://meonlineshop.rf.gd/api/logout");
         // Remove the access token
         this.removeAccessToken();
         // Log a message indicating that the logout was successful
