@@ -34,7 +34,7 @@ const router = createRouter({
     },
     {
       path:"/regis",
-      name:"register",
+      name:"regis",
       component: Register,
     },
     // Create product route
@@ -111,7 +111,7 @@ router.beforeEach((to, from, next) => {
   const authStore = useAuthStore();
 
   if (to.name !== "login" && !authStore.isLoggedIn) {
-    if(to.name === "register"){
+    if(to.name == "regis"){
       next();
     }else{
       next({ name: "login" });

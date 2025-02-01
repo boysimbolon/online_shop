@@ -1,59 +1,70 @@
 <template>
   <!-- Main wrapper div to create a full height layout with flexbox for centering the content -->
-  <div
-    class="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8"
-  >
+  <div class="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
     <!-- Form container with a fixed width and spaced children -->
     <div class="max-w-md w-full space-y-8 text-gray-700">
       <!-- Logo and title -->
       <div class="flex items-center justify-center">
         <!-- SVG icon for the logo -->
-        <icon-online-shop/>
+        <IconOnlineShop />
         <!-- Title text -->
-        <h2 class="text-2xl font-bold">Online Shop</h2>
+        <h2 class="text-2xl font-bold">Login | Online Shop</h2>
       </div>
+
       <!-- Error message container -->
       <div v-if="errorMessage">
         <p class="bg-red-100 text-red-700 rounded-lg p-4">{{ errorMessage }}</p>
       </div>
+
       <!-- Login form with onSubmit event handler -->
       <form class="mt-8 space-y-6" @submit.prevent="onSubmit">
         <!-- Hidden input for remember -->
         <input type="hidden" name="remember" value="true" />
+
         <!-- Input fields container -->
         <div class="rounded-md shadow-sm -space-y-px">
           <!-- Email input field -->
           <div>
             <label for="email-address" class="sr-only">Email address</label>
             <input
-              id="email-address"
-              name="email"
-              type="email"
-              v-model="email"
-              required
-              class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-              placeholder="Email address"
+                id="email-address"
+                name="email"
+                type="email"
+                v-model="email"
+                required
+                autocomplete="email"
+                class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                placeholder="Email address"
+                aria-label="Email Address"
             />
           </div>
+
           <!-- Password input field -->
           <div>
             <label for="password" class="sr-only">Password</label>
             <input
-              id="password"
-              name="password"
-              type="password"
-              v-model="password"
-              required
-              class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-blue-500 focus:border-500 focus:z-10 sm:text-sm"
-              placeholder="Password"
+                id="password"
+                name="password"
+                type="password"
+                v-model="password"
+                required
+                autocomplete="current-password"
+                class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
+                placeholder="Password"
+                aria-label="Password"
             />
           </div>
         </div>
+
+        <!-- Register link -->
+        <router-link :to="{ name: 'regis' }" class="text-blue-500 hover:text-blue-700">Register</router-link>
+
         <!-- Login button container -->
         <div>
           <button
-            type="submit"
-            class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+              type="submit"
+              class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+              aria-label="Login"
           >
             Login
           </button>
@@ -62,17 +73,17 @@
     </div>
   </div>
 </template>
+
 <script setup>
 // Import required dependencies and hooks
 import { ref } from "vue";
 import axios from "axios";
-import { useRouter, useRoute } from "vue-router";
+import { useRouter } from "vue-router";
 import { useAuthStore } from "@/stores/auth";
-import IconOnlineShop from "@/components/icons/iconOnlineShop.vue";
+import IconOnlineShop from "@/components/icons/IconOnlineShop.vue";
 
 // Initialize required variables and hooks
 const router = useRouter();
-const route = useRoute();
 const authStore = useAuthStore();
 
 // Reactive data to store user input and error messages
@@ -97,23 +108,17 @@ async function onSubmit() {
     console.log("Login successful");
     router.push({ name: "home" });
   } catch (error) {
-    // Check if the error is due to validation
-    if (
-      error.response &&
-      error.response.status === 422 &&
-      error.response.data.errors &&
-      error.response.data.errors.email
-    ) {
-      // Set the error message from the server response
-      errorMessage.value = error.response.data.errors.email[0];
+    // Handle error messages properly
+    if (error.response && error.response.status === 422) {
+      errorMessage.value = error.response.data.errors?.email?.[0] || error.response.data.message;
     } else {
-      // Set a generic error message
-      errorMessage.value = "An error occurred: " + error.message;
+      errorMessage.value = "An error occurred: " + (error.response?.data?.message || error.message);
     }
     console.error(errorMessage.value);
   }
 }
 </script>
+
 <style>
-/* styles here */
+/* Custom styles if needed */
 </style>
