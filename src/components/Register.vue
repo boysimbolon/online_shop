@@ -8,7 +8,7 @@
       <!-- Logo and title -->
       <div class="flex items-center justify-center">
         <!-- SVG icon for the logo -->
-        <icon-online-shop/>
+        <IconOnlineShop />
         <!-- Title text -->
         <h2 class="text-2xl font-bold">Register|Online Shop</h2>
       </div>
@@ -81,7 +81,7 @@ import { ref } from "vue";
 import axios from "axios";
 import { useRouter, useRoute } from "vue-router";
 import { useAuthStore } from "@/stores/auth";
-import IconOnlineShop from "@/components/icons/iconOnlineShop.vue";
+import IconOnlineShop from "@/components/icons/IconOnlineShop.vue";
 
 // Initialize required variables and hooks
 const router = useRouter();
